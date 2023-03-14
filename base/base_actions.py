@@ -17,8 +17,8 @@ class BaseAction(object):
         :return:
         """
         if isinstance(webelement, WebElement):
-            # if webelement, find element
-            # WebElement.find_element(By.class, value)
+            # if webelement, find element under the element
+            # WebElement.find_element(By.class, value), sub-element
             return webelement.find_element(loc[0], loc[1])
 
         # from selenium.webdriver.common.by import By
