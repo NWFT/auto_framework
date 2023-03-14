@@ -1,5 +1,12 @@
+import os
+
 import pytest
 
+@pytest.fixture()
+def foo():
+    print("##########fixture before yield")
+    yield
+    print("##########fixture after yield")
 
 def get_divid(x):
     if x == 0:
@@ -26,9 +33,10 @@ class TestCases:
             result = get_divid(0)
         assert except_obj.type == ValueError
 
+    @pytest.mark.usefixtures("foo")
     def test_02(self):
         result = get_divid(1)
-        assert result == 10
+        assert result != 10
 
 
 def test_abc():
@@ -51,4 +59,5 @@ def teardown_function():
 
 
 if __name__ == '__main__':
-    pytest.main(["-s"])
+    file = os.path.basename(__file__)
+    pytest.main(["-s", file])
