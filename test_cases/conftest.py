@@ -26,4 +26,29 @@ def bar(foo):
     return resp
 
 
+@pytest.fixture(scope='class')
+def class_fixture():
+    print("Class fixture, before yield")
+    yield
+    print("Class fixture, after yield")
+
+
+@pytest.fixture(scope='module')
+def module_fixture():
+    print("Module fixture, before yield")
+    yield
+    print("Module fixture, after yield")
+
+
+@pytest.fixture(scope='session')
+def session_fixture():
+    print("Session fixture, before yield")
+    yield
+    print("Session fixture, after yield")
+
+
+
+
+
+
 

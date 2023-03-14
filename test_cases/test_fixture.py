@@ -31,6 +31,15 @@ def test_web_response(bar):
     assert bar.status_code == 200
 
 
+@pytest.mark.usefixtures("class_fixture")
+class TestCases():
+    def test_1(self):
+        print("test_1")
+
+    def test_2(self):
+        print("test_2")
+
+
 if __name__ == '__main__':
     file = os.path.basename(__file__)
     pytest.main(['-s', file])
