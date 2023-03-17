@@ -1,0 +1,6 @@
+1. download allure
+    https://github.com/allure-framework/alluer2/realease
+
+
+
+
