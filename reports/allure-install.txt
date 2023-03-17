@@ -1,6 +1,14 @@
 1. download allure
-    https://github.com/allure-framework/alluer2/realease
+    https://github.com/allure-framework/allure2
+    Releases - latest
+    download-unzip
+    setting PATh in windows OS
 
+2. install allure-pytest with pip
+    > pip install allure-pytest
 
+3. generate allure report
+    > pytest --alluredir=./reports/allure-report/
 
-
+4. check report
+    > allure serve ./reports/allure-report
