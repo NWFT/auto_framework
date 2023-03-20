@@ -1,8 +1,8 @@
 import pytest
 
 from base.base_driver import init_driver
-from pages.homepage import HomepageActions
-from pages.loginpage import LoginPageActions
+from pages_object.home_page import HomepageActions
+from pages_object.login_page import LoginPageActions
 from test_data.userInfo import LOGIN_USER_DATA
 
 

@@ -1,0 +1,200 @@
+
+1 "填充文本框"
+from selenium import webdriver
+driver = webdriver.Chrome(executable_path='./chromedriver')
+driver.get('https://www.google.com')
+search_input = driver.find_element_by_id('q')
+search_input.send_keys('python')
+driver.quit()
+
+2 单选按钮
+from selenium import webdriver
+driver = webdriver.Chrome(executable_path='./chromedriver')
+driver.get('https://www.w3school.com.cn/tiy/t.asp?f=html_form_radio')
+# 切换iframe
+iframe = driver.find_element_by_id('iframeResult')
+driver.switch_to.frame(iframe)
+# 找到female单选框
+female = driver.find_element_by_xpath('//input[@value="female"]')
+female.click() # 选中
+time.sleep(5)
+driver.quit()
+
+3 下拉列表
+driver.get('https://www.w3school.com.cn/tiy/t.asp?f=html_elements_select')
+# 切换iframe
+iframe = driver.find_element_by_id('iframeResult')
+driver.switch_to.frame(iframe)
+# 找到audi选项
+option = driver.find_element_by_xpath('//option[@value="audi"]')
+option.click()
+
+# 找到select
+select = Select(driver.find_element_by_xpath('//select[@name="cars"]'))
+select.select_by_index(1) # 选中索引为1的选项,索引从0开始
+select.select_by_value('audi') # 选中value等于audi的选项
+select.select_by_visible_text('Volvo') # 选中option的文本为Volvo的选项
+
+4 离开iframe
+# 切回到默认内容
+driver.switch_to.default_content()
+
+
+5 切换窗口和标签页
+# 选取第一个结果并点击
+driver.find_element_by_xpath('//div[@id="1"]//a').click()
+for handle in driver.window_handles:
+    if handle != original_window:
+        # 切换到新窗口
+        driver.switch_to.window(handle)
+        break
+# 打印当前窗口句柄
+print(driver.current_window_handle)
+print(driver.title)
+
+
+# 打开新标签页并切换到新标签页
+driver.switch_to.new_window('tab')
+# 打开一个新窗口并切换到新窗口
+driver.switch_to.new_window('window')
+#关闭标签页或窗口
+driver.close()
+#切回到之前的标签页或窗口
+driver.switch_to.window(original_window)
+driver.quit()
+
+
+6 等待
+
+隐式等待
+WebDriver在试图查找任何元素时都会在一定时间内轮询DOM。
+driver.implicitly_wait(10)
+my_dynamic_element = driver.find_element(By.ID, "myDynamicElement")
+
+显式等待
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+# 选取第一个结果并点击
+WebDriverWait(driver,timeout=3).until(EC.visibility_of_element_located(('id', '1'))).click()
+EC.presence_of_element_located() - DOM中出现
+EC.element_to_be_clickable()
+EC.visibility_of_element_located()
+EC.element_to_be_selected()
+WebDriverWait(driver, timeout=3,poll_frequency=0.5).until(EC.visibility_of_element_located(('id','1'))).click()
+
+强制等待
+time.sleep()
+
+
+7 javascript 警告框，提示框和确认框
+7.1 Alerts警告框
+# 等待alert弹出
+alert = WebDriverWait(driver, timeout=3).until(EC.alert_is_present())
+# 获取弹出框文本
+text = alert.text
+print(text)
+time.sleep(1)
+# 确认
+alert.accept()
+
+7.2 confirm 确认框
+# 等待alert弹出
+WebDriverWait(driver, timeout=3).until(EC.alert_is_present())
+# 获取alert
+alert = driver.switch_to.alert
+# 获取弹出框文本
+text = alert.text
+print(text)
+time.sleep(1)
+# 取消
+alert.dismiss()
+
+7.3 prompt提示框
+# 等待alert弹出
+WebDriverWait(driver, timeout=3).until(EC.alert_is_present())
+# 获取alert
+alert = driver.switch_to.alert
+# 输入信息
+alert.send_keys('xxxx')
+# 确认
+alert.accept()
+
+8 鼠标操作
+需要调用ActionChains对象来执行对应的方法
+8.1 clickAndHold
+它将移动到该元素，然后在给定元素的中间单击(不释放)
+8.2 contextClick
+此方法首先将鼠标移动到元素的位置, 然后在给定元素执行上下文点击(右键单击).
+8.3 doubleClick
+它将移动到该元素, 并在给定元素的中间双击.
+8.4 moveToElement
+此方法将鼠标移到元素的中间. 执行此操作时, 该元素也会滚动到视图中.
+8.5 moveByOffset:
+此方法将鼠标从其当前位置(或0,0)移动给定的偏移量. 如果坐标在视图窗口之外, 则鼠标最终将在浏览器
+窗口之外.
+8.6 dragAndDrop
+此方法首先在源元素上单击并按住，然后移动到目标元素的位置后释放鼠标.
+8.7 release
+此操作将释放按下的鼠标左键. 如果WebElement转移了, 它将释放给定WebElement上按下的鼠标左键.
+
+# move_to_element
+div = WebDriverWait(driver,timeout=3).until(EC.visibility_of_element_located(('xpath','//div[@onmouseover="mOver"]')))
+# 移动到
+webdriver.ActionChains(driver).move_to_element(div).perform()
+# 移开
+webdriver.ActionChains(driver).move_by_offset(xoffset=500,yoffset=500).perform()
+# click_and_hole1
+div = driver.find_element_by_xpath('//div[@onmousedown="mDown"]')
+
+webdriver.ActionChains(driver).click_and_hold(div).perform()
+# release
+webdriver.ActionChains(driver).release(div).perform()
+
+# double_click
+button = driver.find_element_by_xpath('//button[@ondblclick]')
+webdriver.ActionChains(driver).double_click(button).perform()
+# drag
+div1 = driver.find_element_by_id('draggable')
+div2 = driver.find_element_by_id('droppable')
+webdriver.ActionChains(driver).drag_and_drop(div1, div2).perform()
+
+
+9 执行js代码
+# 滚动100px
+driver.execute_script("window.scrollTo(0,100)")
+# 移动到底部
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+# 移动到顶部
+driver.execute_script("window.scrollTo(0,0)")
+
+div = driver.find_element_by_xpath('//div')
+# 移动到元素的底端与当前窗口的底部对齐
+driver.execute_script("arguments[0].scrollIntoView(false);", div)
+# 移动到元素的顶端与当前窗口的顶端对齐
+driver.execute_script("arguments[0].scrollIntoView();", div)
+
+
+10 上传操作
+10.1 //input
+input = driver.find_element_by_xpath('//input[@class="upload-pic"]')
+input.send_keys('/users/home/ubuntu/test/1.jpeg')
+
+10.2 使用pywinauto上传
+缺点： 只能在windwows上使用
+优点：可以选择多个文件，路径中有中文也可以
+点击打开“文件上传窗口”：
+from pywinauto.keyboard import send_keys
+send_keys('c:\images\1.png')
+send_keys('{vk_RETURN}')
+send_keys('"c:\images\1.png"')
+send_keys('"c:\images\2.png"')
+send_keys('{vk_RETURN}')
+
+10.3 使用pyautogui来上传
+优点：跨平台（linux，mac，windows都可以使用）
+缺点：只能选择一个文件
+import pyautogui
+pyautogui.write('\var\log\x.log')
+pyautogui.press('enter',2)
+
+

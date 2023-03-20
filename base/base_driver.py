@@ -35,7 +35,7 @@ driver.find_element(By.xx, value).is_enabled()
 
 """
 #   change TABs when open many windows
-# 1) get all pages handles
+# 1) get all pages_object handles
 current_windows = driver.window_handles
 # 2) switch to expected TAB
 driver.switch_to.window(current_windows[1])
