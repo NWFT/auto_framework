@@ -3,12 +3,12 @@ import time
 
 # base_dir
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 # test cases
-TEST_CASES_DIR = os.path.join(BASE_DIR, 'test_cases')
-
+TEST_CASES_DIR = os.path.join(BASE_DIR, 'test_cases/')
 # test reports
-TEST_REPORT_DIR = os.path.join(BASE_DIR, 'reports')
+TEST_REPORT_DIR = os.path.join(BASE_DIR, 'reports/')
+# screen shots dir
+SCREENSHOTS_DIR = os.path.join(BASE_DIR, 'logs/')
 
 # Log files config
 LOG_CONFIG = {

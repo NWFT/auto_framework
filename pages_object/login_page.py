@@ -1,20 +1,24 @@
-from base.base_actions import BaseAction
-from .constants import login_url,LOGIN_ELEMENTS
+from pagee_elements_locator.login_page_locator import LoginPageLocators as loc
+from pages_object.base_page import BasePage
 
 
-class LoginPageActions(BaseAction):
-    def __init__(self, driver):
-        super().__init__(driver)
+class LoginPage(BasePage):
+    name = "Login_Page"
 
-    def go_to_login_page(self):
-        self.driver.get(login_url)
+    def login(self, user, password):
+        """
+        Login page's login action, input user/pwd and click to submit
+        :param user: username
+        :param password: password
+        :return: None
+        """
+        self.input_text(loc.username_loc, "Login_input_username", user)
+        self.input_text(loc.password_loc, "Login_input_password", password)
+        self.click_element(loc.submit_loc, "Login_click_submit")
 
-    def input_username(self, username):
-        self.input_element_content(LOGIN_ELEMENTS['login_username'], username)
-
-    def input_password(self, password):
-        self.input_element_content(LOGIN_ELEMENTS['login_password'], password)
-
-    def click_to_submit(self):
-        self.click_element(LOGIN_ELEMENTS['login_btn'])
-
+    def get_error_msg_from_login_area(self):
+        """
+        get error messages when login failed.
+        :return: text
+        """
+        return self.get_text(loc.login_failed_error_msg_loc, "Login_Get_error_msg")

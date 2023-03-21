@@ -1,17 +1,34 @@
-from base.base_actions import BaseAction
-from .constants import index_url,HOME_ELEMENTS,LOGIN_ELEMENTS
+from selenium.webdriver import ActionChains
+
+from pagee_elements_locator.home_page_locator import HomePageLocators as loc
+from pages_object.base_page import BasePage
 
 
-class HomepageActions(BaseAction):
-    def __init__(self, driver):
-        super().__init__(driver)
+class HomePage(BasePage):
 
-    def go_to_homepage(self):
-        self.driver.get(index_url)
+    def is_exit_exist(self):
+        """
+        Check 'exit' button exist or not, if exit exists, return True
+        :return: True/False
+        """
+        try:
+            self.wait_element_visible(loc.exit_loc, "Homepage_Check_exist_button")
+        except:
+            return False
+        else:
+            return True
 
-    def click_to_login_page(self):
-        self.click_element(HOME_ELEMENTS['login_btn'])
+    def click_product_list(self):
+        """
+        Mouse over level1 item, when level2 appear, move to and click
+        :return:
+        """
+        ele = self.get_element(loc.product_list_level1, "Homepage_Product-list-level1")
+        # mouse over the element
+        # 1. ActionChains instance
+        ta = ActionChains(self.driver)
+        # 2、mouse action
+        ta.move_to_element(ele).perform()
 
-    def click_to_logout(self):
-        self.click_element(HOME_ELEMENTS['logout_btn'])
-
+        # waiting for leverl-3 menu item visible, and click
+        self.click_element(loc.product_list_mobile, "Homepage_Click-to-product-list")

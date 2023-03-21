@@ -24,7 +24,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from common.handler_log import get_logger
 # from web.TestData import global_data
 import settings
-screenshots_dir = os.path.join(settings.BASE_DIR, 'logs')
 
 
 logger = get_logger(__name__)
@@ -132,7 +131,7 @@ class BasePage:
 
     def get_element(self, locator, page_operation, wait=None, **kwargs):
         """
-        Get the element after visible or page contains.
+        Get the element object, after visible or page contains.
         :param locator: element's locator
         :param page_operation: Note for log and screenshot
         :param timeout: wait time with default
@@ -294,7 +293,7 @@ class BasePage:
         """
         # image-name-format: {Page-name_Operation}_timestamp.png
         cur_time = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime())
-        file_path = os.path.join(screenshots_dir, "{}_{}.png".format(page_operation, cur_time))
+        file_path = os.path.join(settings.SCREENSHOTS_DIR, "{}_{}.png".format(page_operation, cur_time))
         self.driver.save_screenshot(file_path)
         logger.info(f"Screenshot has been saved at: {file_path}")
 
