@@ -26,7 +26,7 @@ from common.handler_log import get_logger
 import settings
 
 
-logger = get_logger(__name__)
+logger = get_logger(__name__, debug=True)
 
 
 class BasePage:

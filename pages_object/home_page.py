@@ -18,6 +18,9 @@ class HomePage(BasePage):
         else:
             return True
 
+    def logout(self):
+        pass
+
     def click_product_list(self):
         """
         Mouse over level1 item, when level2 appear, move to and click

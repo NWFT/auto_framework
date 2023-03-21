@@ -22,7 +22,7 @@ def get_logger(name, filename=file_name, debug=False, fmt=None, mode='a', encodi
 
     # config formatter
     if fmt is None:
-        fmt = '%(asctime)s %(levelname)s [%(module)s-->lines:%(lineno)d]:%(message)s'
+        fmt = '%(asctime)s %(levelname)s [%(filename)s-->lines:%(lineno)d]:%(message)s'
     file_formatter = logging.Formatter(fmt)
     console_formatter = logging.Formatter(fmt)
 

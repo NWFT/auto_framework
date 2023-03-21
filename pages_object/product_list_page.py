@@ -1,7 +1,6 @@
 from pagee_elements_locator.product_list_page_locator import ProductListLocators as loc
 from pages_object.base_page import BasePage
 
-
 class ProductListPage(BasePage):
 
     def click_to_product_detail_page(self):

@@ -1,0 +1,8 @@
+INFO     test_cases.base_case:base_case.py:13 ======Login function start======
+INFO     test_cases.conftest:conftest.py:23 ======== class fixture, open browser =======
+INFO     pages_object.base_page:base_page.py:142 With TESTXXXXXXXXXXXXXX, Finding element ('name', 'q').
+INFO     pages_object.base_page:base_page.py:51 With TESTXXXXXXXXXXXXXX, Waiting for element ('name', 'q') visible.
+INFO     pages_object.base_page:base_page.py:70 Spent 0.042 seconds, on waiting.
+INFO     pages_object.base_page:base_page.py:214 With TESTXXXXXXXXXXXXXX, send text XXXXXXXX to ('name', 'q').
+INFO     test_cases.conftest:conftest.py:27 ======== class fixture, close browser =======
+INFO     test_cases.base_case:base_case.py:17 ======Login function end======

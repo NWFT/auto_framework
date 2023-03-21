@@ -10,3 +10,9 @@ class LoginPageLocators:
     submit_loc = (By.CLASS_NAME, "input_submit")
     # error message locator
     login_failed_error_msg_loc = (By.XPATH, '//div[@id="error_info"]')
+
+    # remember checkbox
+    remember_loc = (By.NAME, "checkbox")
+
+    # google search input
+    search_input_loc = (By.NAME, 'q')
